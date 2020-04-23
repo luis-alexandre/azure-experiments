@@ -34,7 +34,7 @@ O projeto é um .NET Core Console Application, e deve ser executado com os argum
 
 Exemplo:
 
-`dotnet KeyVaultIntegration.dll -k <URL DO KEY VAUL> -s <SECRET A SER RECUPERADO> -c <CLIENT ID> -p <CLIENT SECRET>`
+`dotnet KeyVaultIntegration.dll -k <URL DO KEY VAULT> -s <SECRET A SER RECUPERADO> -c <CLIENT ID> -p <CLIENT SECRET>`
 
 ## Packages utlizados no projeto
 
@@ -51,3 +51,6 @@ Os seguintes packages foram utilizados no projeto:
 
 *Provide Key Vault authentication with an access control policy*
 [https://docs.microsoft.com/en-us/azure/key-vault/general/group-permissions-for-apps](https://docs.microsoft.com/en-us/azure/key-vault/general/group-permissions-for-apps)
+
+*Azure Key Vault & Access from C#*
+[https://jeanpaul.cloud/2019/12/07/azure-key-vault-access-from-c/](https://jeanpaul.cloud/2019/12/07/azure-key-vault-access-from-c/)
