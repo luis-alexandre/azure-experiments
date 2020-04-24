@@ -40,10 +40,14 @@ namespace CosmosDB
                                                      options.CollectionName,
                                                      x => x.Id.Equals("Paul"));
 
-            Console.WriteLine("Excluindo documento da coleção");
+            Console.WriteLine("Excluindo os documentos da coleção");
             await helper.DeleteDocumentAsync<Person>(options.DatabaseName,
                                                      options.CollectionName,
                                                      personTwo);
+
+            await helper.DeleteDocumentAsync<Person>(options.DatabaseName,
+                                                     options.CollectionName,
+                                                     personOne);
 
             Console.WriteLine("Excluindo a base de dados");
             await helper.DeleteDatabaseAsync(options.DatabaseName);
