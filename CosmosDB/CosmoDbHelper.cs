@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CosmosDB
@@ -27,10 +26,13 @@ namespace CosmosDB
         /// </summary>
         public async Task CreateDatabaseAsync(string databaseName)
         {
-            await this.documentClient.CreateDatabaseIfNotExistsAsync(new Database
+            var response = await this.documentClient.CreateDatabaseIfNotExistsAsync(new Database
             {
                 Id = databaseName
             });
+
+            Console.WriteLine(response.StatusCode);
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -39,7 +41,10 @@ namespace CosmosDB
         public async Task DeleteDatabaseAsync(string databaseName)
         {
             Uri databaseUri = UriFactory.CreateDatabaseUri(databaseName);
-            await this.documentClient.DeleteDatabaseAsync(databaseUri);
+            var response = await this.documentClient.DeleteDatabaseAsync(databaseUri);
+
+            Console.WriteLine(response.StatusCode);
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -54,7 +59,10 @@ namespace CosmosDB
 
             Uri databaseUri = UriFactory.CreateDatabaseUri(databaseName);
 
-            await this.documentClient.CreateDocumentCollectionIfNotExistsAsync(databaseUri, documentCollection);
+            var response = await this.documentClient.CreateDocumentCollectionIfNotExistsAsync(databaseUri, documentCollection);
+
+            Console.WriteLine(response.StatusCode);
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -66,14 +74,20 @@ namespace CosmosDB
             try
             {
                 Uri documentUri = UriFactory.CreateDocumentUri(databaseName, collectionName, document.Id);
-                await this.documentClient.ReadDocumentAsync(documentUri);
+                var response = await this.documentClient.ReadDocumentAsync(documentUri);
+
+                Console.WriteLine(response.StatusCode);
+                Console.WriteLine();
             }
             catch (DocumentClientException de)
             {
                 if (de.StatusCode == HttpStatusCode.NotFound)
                 {
                     Uri collectionUri = UriFactory.CreateDocumentCollectionUri(databaseName, collectionName);
-                    await this.documentClient.CreateDocumentAsync(collectionUri, document);
+                    var response = await this.documentClient.CreateDocumentAsync(collectionUri, document);
+
+                    Console.WriteLine(response.StatusCode);
+                    Console.WriteLine();
                 }
             }
         }
@@ -110,7 +124,10 @@ namespace CosmosDB
             where Entity : Model.EntityBase
         {
             Uri documentUri = UriFactory.CreateDocumentUri(databaseName, collectionName, document.Id);
-            await this.documentClient.ReplaceDocumentAsync(documentUri, document);
+            var response = await this.documentClient.ReplaceDocumentAsync(documentUri, document);
+
+            Console.WriteLine(response.StatusCode);
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -120,7 +137,10 @@ namespace CosmosDB
             where Entity : Model.EntityBase
         {
             Uri documentUri = UriFactory.CreateDocumentUri(databaseName, collectionName, document.Id);
-            await this.documentClient.DeleteDocumentAsync(documentUri);
+            var response = await this.documentClient.DeleteDocumentAsync(documentUri);
+
+            Console.WriteLine(response.StatusCode);
+            Console.WriteLine();
         }
     }
 }

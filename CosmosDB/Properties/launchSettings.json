@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "CosmosDB": {
+      "commandName": "Project"
+    }
+  }
+}

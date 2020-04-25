@@ -1,4 +1,6 @@
-﻿using CosmosDB.Model;
+﻿using CommandLine;
+using CosmosDB.Model;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -8,7 +10,8 @@ namespace CosmosDB
     {
         static void Main(string[] args)
         {
-            RunApplication(new Options());
+            Parser.Default.ParseArguments<Options>(args)
+                          .WithParsed<Options>(opts => RunApplication(opts));
         }
 
         private static void RunApplication(Options options)
@@ -38,7 +41,9 @@ namespace CosmosDB
             Console.WriteLine("Localizando documento dentro da coleção");
             var result = helper.GetDocuments<Person>(options.DatabaseName,
                                                      options.CollectionName,
-                                                     x => x.Id.Equals("Paul"));
+                                                     x => x.FirstName.Equals("Paul"));
+
+            Console.WriteLine(JsonConvert.SerializeObject(result));
 
             Console.WriteLine("Excluindo os documentos da coleção");
             await helper.DeleteDocumentAsync<Person>(options.DatabaseName,
@@ -51,6 +56,8 @@ namespace CosmosDB
 
             Console.WriteLine("Excluindo a base de dados");
             await helper.DeleteDatabaseAsync(options.DatabaseName);
+
+            Console.WriteLine("Done!");
         }
 
         private static Person GenerateEntitySample(string id, string firstName, string lastName)
@@ -65,7 +72,6 @@ namespace CosmosDB
                     new Device { OperatingSystem = "iOS", CameraMegaPixels = 12, Ram = 32, Usage = "Work"},
                     new Device { OperatingSystem = "Windows", CameraMegaPixels = 12, Ram = 64, Usage = "Personal"}
                 },
-                Gender = "Female",
                 Address = new Address
                 {
                     City = "Laguna Beach",
