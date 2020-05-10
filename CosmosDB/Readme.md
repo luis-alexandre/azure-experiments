@@ -18,7 +18,7 @@ O Azure Cosmos DB é um banco de dados distribuído da Azure.
 Para executar o projeto, além de possuir uma conta na Azure, é necessário ter os itens abaixo:
 
 * .NET Core 3.1 para compilar e rodar o projeto.
-* Uma conta no *Azure Cosmos DB* na Azure. 
+* Um recurso do tipo *Azure Cosmos DB* criado na Azure. 
 
 ## Como executar o projeto
 
