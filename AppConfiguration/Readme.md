@@ -20,7 +20,7 @@ O projeto é um .NET Core Console Application, e deve ser executado com os argum
 
 Exemplo:
 
-`-c <CONNECTION STRING>
+`-c <CONNECTION STRING>`
 
 ## Packages utlizados no projeto
 
